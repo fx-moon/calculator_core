@@ -1,8 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <stdexcept>
-#include <string>
+#include "core.h"
 using std::cin, std::cout, std::cerr, std::runtime_error, std::overflow_error, std::underflow_error, std::endl, std::vector, std::string;
+
+namespace calc_core
+{
 
 int plus(int x, int y)
 {
@@ -97,7 +97,7 @@ class ele
     }
 };
 
-int calc(string &s)
+int _calc(string &s)
 {
     int ret = 0;
     vector<ele> data;
@@ -115,7 +115,7 @@ int calc(string &s)
             if (r.judge() == 3)
             {
                 r.type = 0;
-                r.s.a = calc(s);
+                r.s.a = _calc(s);
             }
 
             switch (p.gchar())
@@ -153,19 +153,8 @@ int calc(string &s)
     return data[0].gnum();
 }
 
-int main()
+int calc(string &s)
 {
-    string s;
-    int i;
-    cin >> s;
-    try
-    {
-        cout << calc(s) << endl;
-    }
-    catch (const std::exception &e)
-    {
-        cerr << e.what() << endl;
-    }
-
-    return 0;
+    return _calc(s);
 }
+} // namespace calc_core
